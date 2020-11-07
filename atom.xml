@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>帅气哥哥的博客</title>
+  
+  <subtitle>MASTER IS A HANDSOME GAY</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2020-11-07T12:00:54.401Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>Ac</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GitHub + Hexo 搭建博客</title>
+    <link href="http://example.com/2020/11/07/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://example.com/2020/11/07/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</id>
+    <published>2020-11-07T07:45:16.364Z</published>
+    <updated>2020-11-07T12:00:54.401Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;这是我一边搭建一边写的，按照步骤来应该没什么问题&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="hexo" scheme="http://example.com/categories/hexo/"/>
+    
+    
+    <category term="标签1" scheme="http://example.com/tags/%E6%A0%87%E7%AD%BE1/"/>
+    
+    <category term="标签2" scheme="http://example.com/tags/%E6%A0%87%E7%AD%BE2/"/>
+    
+  </entry>
+  
+</feed>
