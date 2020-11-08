@@ -1,10 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>github部署vue、react项目和内网穿透</title>
+    <url>/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<p>记录一下怎么把项目在github服务器上运行起来<br>嘿嘿。。。又是一个白嫖服务器的小技巧！！</p>
+<a id="more"></a>
+
+
+
+<h2 id="1-创建Vue-React项目"><a href="#1-创建Vue-React项目" class="headerlink" title="1.创建Vue/React项目"></a>1.创建Vue/React项目</h2><h4 id="注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件"><a href="#注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件" class="headerlink" title="注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件"></a>注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件</h4><ul>
+<li>Vue删除 /dist</li>
+<li>React 删除 /build</li>
+</ul>
+<h2 id="2-GitHub创建一个空仓库"><a href="#2-GitHub创建一个空仓库" class="headerlink" title="2.GitHub创建一个空仓库"></a>2.GitHub创建一个空仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png" alt="QQ截图20201102164405"></p>
+<h2 id="3-将项目上传到GitHub"><a href="#3-将项目上传到GitHub" class="headerlink" title="3.将项目上传到GitHub"></a>3.将项目上传到GitHub</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin GitHub仓库地址</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-打包项目"><a href="#4-打包项目" class="headerlink" title="4.打包项目"></a>4.打包项目</h2><h4 id="注意：vue-react打包前需要修改配置文件，否则可能无法运行"><a href="#注意：vue-react打包前需要修改配置文件，否则可能无法运行" class="headerlink" title="注意：vue/react打包前需要修改配置文件，否则可能无法运行"></a>注意：vue/react打包前需要修改配置文件，否则可能无法运行</h4><h5 id="Vue-cli2："><a href="#Vue-cli2：" class="headerlink" title="Vue-cli2："></a>Vue-cli2：</h5><ul>
+<li>找到config –&gt; index.js 文件，修改build</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">assetsPublicPath: <span class="string">&#x27;./&#x27;</span>  <span class="comment">// 前面加个点就行</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Vue-cli3"><a href="#Vue-cli3" class="headerlink" title="Vue-cli3:"></a>Vue-cli3:</h5><ul>
+<li>在项目目录下创建vue.config.js文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  publicPath: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="React-cli"><a href="#React-cli" class="headerlink" title="React-cli:"></a>React-cli:</h5><ul>
+<li>在package.json中加入</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;homepage&quot;:&quot;.&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-将打包后的项目上传到GitHub"><a href="#5-将打包后的项目上传到GitHub" class="headerlink" title="5.将打包后的项目上传到GitHub"></a>5.将打包后的项目上传到GitHub</h2><ul>
+<li>执行下面代码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm run build // 打包项目</span><br><span class="line">git checkout -b gh-pages //创建并切换到gh-pages分支</span><br><span class="line">git add -f dist // 将dist文件夹提交到gh-pages分支</span><br><span class="line">git commit -m &#x27;create project&#x27; </span><br><span class="line"> // 将dist文件夹提交到github上</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>当项目更新后：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// 先上传main分支</span><br><span class="line">git add . </span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 再上传dist文件夹到gh-page分支</span><br><span class="line">git checkout gh-page</span><br><span class="line">git merge main  // 合并main分支内容</span><br><span class="line">npm run build   // 打包gh-page分支下的项目</span><br><span class="line">git add -f dist</span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h2 id="6-开启GitHub-Page"><a href="#6-开启GitHub-Page" class="headerlink" title="6.开启GitHub Page"></a>6.开启GitHub Page</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/6.png" alt="QQ截图20201102165732"></p>
+<h2 id="7-内网穿透"><a href="#7-内网穿透" class="headerlink" title="7.内网穿透"></a>7.内网穿透</h2><h4 id="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"><a href="#如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透" class="headerlink" title="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"></a>如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透</h4><p>市面上有很多内网穿透的软件，这里我介绍一下我使用的<strong>网云穿</strong></p>
+<ul>
+<li>下载app     <a href="http://xiaomy.net/">http://xiaomy.net/</a> (下载客户端)</li>
+<li>注册账号</li>
+<li>点击<strong>开通隧道</strong> （有一个永久免费的，点击领取）</li>
+<li>编辑隧道</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.1.png" alt="QQ截图20201102170818"></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.2.png" alt="QQ截图20201102170838"></p>
+<ul>
+<li>开启客户端</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.3.png" alt="QQ截图20201102171107"></p>
+<ul>
+<li>点击启动</li>
+</ul>
+]]></content>
+      <categories>
+        <category>github</category>
+      </categories>
+      <tags>
+        <tag>abc</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>H5新属性---draggable</title>
+    <url>/2019/11/15/drag/</url>
+    <content><![CDATA[<p>上次做项目有拖动排序的功能，用得实在太少，记录一下</p>
+<a id="more"></a>
+
+
+
+
+<h2 id="H5—draggable"><a href="#H5—draggable" class="headerlink" title="H5—draggable"></a>H5—draggable</h2><h4 id="1-draggable-可拖放属性"><a href="#1-draggable-可拖放属性" class="headerlink" title="1.draggable 可拖放属性"></a>1.draggable 可拖放属性</h4><p>默认情况下，图像、链接是可以拖动的，但是文本不行，文本是无法拖动的。</p>
+<p>文本如果有拖动的需求的话可以在父标签上添加<strong>draggable</strong>属性，默认情况下除图像、链接，标签的属性<strong>draggable=“false”</strong>，把他改为<strong>true</strong>就可以拖动了</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 默认情况下可以拖动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> &gt;</span>  </span><br><span class="line"><span class="comment">&lt;!-- 设置为不可以拖动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&quot;</span> <span class="attr">draggable</span>=<span class="string">&quot;false&quot;</span> &gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 默认情况下不可以拖动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span>一个div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 设置为可以拖动 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">draggable</span>=<span class="string">&quot;true&quot;</span>&gt;</span>一个div<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>支持draggable属性的浏览器有IE10+，Firfox4+，Safari5+，Chrome，另外为了让Firfox支持可拖放属性，还必须添加一个ondragstart事件处理程序，并在dataTransfer对象中保存一些信息。</p>
+<h4 id="2-拖动有关的事件"><a href="#2-拖动有关的事件" class="headerlink" title="2.拖动有关的事件"></a>2.拖动有关的事件</h4><ul>
+<li>以下事件只能当**draggable=”true”**时才能触发（被拖元素触发）<ul>
+<li>dragstart: 鼠标按下开始拖动</li>
+<li>drag: 拖动过程中触发</li>
+<li>dragend: 拖动结束时触发</li>
+</ul>
+</li>
+<li>以下事件是任何元素都可触发（鼠标经过元素触发）<ul>
+<li>dragenter: 鼠标进行拖动时，拖进某个元素时触发该元素的dragenter事件</li>
+<li>dragover: 鼠标进行拖动时，在某个元素中拖动时触发该元素的dragover事件</li>
+<li>dragleave: 鼠标进行拖动时，拖出某个元素时触发该元素的dragleave事件</li>
+<li>drop: 鼠标进行拖动时，在某个元素中松开鼠标时触发该元素的drop事件(drop事件必须要在<strong>dragover</strong>事件中设置**e.preventDefault()**才能触发)</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-事件内置对象dataTransfer"><a href="#3-事件内置对象dataTransfer" class="headerlink" title="3.事件内置对象dataTransfer"></a>3.事件内置对象dataTransfer</h4><ul>
+<li><p>dataTransfer主要有两个方法：<strong>setData()</strong> 和 <strong>getData()</strong></p>
+<ul>
+<li>setData(type, text): 该方法一共有两个参数，<strong>type</strong>是数据类型 ,<strong>text</strong>是保存的文本,该方法可用于保存数据，在dragend事件后销毁被保存的数据，相当于一个临时变量</li>
+<li>getData(type): 该方法用于取出setData保存的数据</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>dataTransfer主要有两个属性：<strong>dropEffect **和 **effectAllowed</strong>来确定被拖动的元素和放置被拖动元素的位置能够接收什么操作，这两个属性要互相搭配才有用</p>
+<ul>
+<li><p>dropEffect总共有4个可能的值：<strong>none、move、copy、link</strong></p>
+</li>
+<li><p>effectAllowed总共有9个可能的值：</p>
+<ul>
+<li>uninitialized：没有给被拖动元素设置任何放置行为</li>
+<li>none：被拖动的元素不能有任何行为</li>
+<li>copy：只允许值为”copy”的dropEffect</li>
+<li>move：只允许值为”move”的dropEffect</li>
+<li>link：只允许值为”link”的dropEffect</li>
+<li>copyLink：只允许值为”copy”和”link”的dropEffect</li>
+<li>copyMove：只允许值为”copy”和”move”的dropEffect</li>
+<li>linkMove：只允许值为”link”和”move”的dropEffect</li>
+<li>all：允许任意dropEffect</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意：必须在dragstart事件处理程序中设置effectAllowed属，必须在dragover事件处理程序中设置dropEffect属性</strong></p>
+<p><strong>effectAllowed是给被拖动元素设置的，dropEffect是给鼠标经过元素设置的，只有当两属性值相同是，被拖元素才能放到鼠标经过的元素的位置</strong></p>
+]]></content>
+      <categories>
+        <category>HTML</category>
+      </categories>
+      <tags>
+        <tag>sadsa</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>GitHub + Hexo 搭建博客</title>
-    <url>/2020/11/07/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <url>/2019/10/06/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<p>这是我一边搭建一边写的，按照步骤来应该没什么问题</p>
 <a id="more"></a>
+
+
 
 <h2 id="1-准备环境"><a href="#1-准备环境" class="headerlink" title="1.准备环境"></a>1.准备环境</h2><h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p><strong>去官网下载安装就行</strong></p>
 <h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p><strong>去官网下载安装</strong></p>
@@ -65,8 +214,7 @@
         <category>hexo</category>
       </categories>
       <tags>
-        <tag>标签1</tag>
-        <tag>标签2</tag>
+        <tag>abc</tag>
       </tags>
   </entry>
 </search>

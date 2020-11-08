@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="记录一下怎么把项目在github服务器上运行起来嘿嘿。。。又是一个白嫖服务器的小技巧！！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="github部署vue、react项目和内网穿透">
+<meta property="og:url" content="http://example.com/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/index.html">
+<meta property="og:site_name" content="帅气哥哥的博客">
+<meta property="og:description" content="记录一下怎么把项目在github服务器上运行起来嘿嘿。。。又是一个白嫖服务器的小技巧！！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/6.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.2.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.3.png">
+<meta property="article:published_time" content="2019-12-04T12:16:28.895Z">
+<meta property="article:modified_time" content="2019-12-04T12:16:23.754Z">
+<meta property="article:author" content="Ac">
+<meta property="article:tag" content="abc">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png">
+
+<link rel="canonical" href="http://example.com/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>github部署vue、react项目和内网穿透 | 帅气哥哥的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="帅气哥哥的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">帅气哥哥的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">MASTER IS A HANDSOME GAY</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header-image.jpg">
+      <meta itemprop="name" content="Ac">
+      <meta itemprop="description" content="MASTER IS A HANDSOME GAY">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="帅气哥哥的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          github部署vue、react项目和内网穿透
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2019-12-04 20:16:28 / 修改时间：20:16:23" itemprop="dateCreated datePublished" datetime="2019-12-04T20:16:28+08:00">2019-12-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/github/" itemprop="url" rel="index"><span itemprop="name">github</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>记录一下怎么把项目在github服务器上运行起来<br>嘿嘿。。。又是一个白嫖服务器的小技巧！！</p>
+<a id="more"></a>
+
+
+
+<h2 id="1-创建Vue-React项目"><a href="#1-创建Vue-React项目" class="headerlink" title="1.创建Vue/React项目"></a>1.创建Vue/React项目</h2><h4 id="注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件"><a href="#注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件" class="headerlink" title="注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件"></a>注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件</h4><ul>
+<li>Vue删除 /dist</li>
+<li>React 删除 /build</li>
+</ul>
+<h2 id="2-GitHub创建一个空仓库"><a href="#2-GitHub创建一个空仓库" class="headerlink" title="2.GitHub创建一个空仓库"></a>2.GitHub创建一个空仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png" alt="QQ截图20201102164405"></p>
+<h2 id="3-将项目上传到GitHub"><a href="#3-将项目上传到GitHub" class="headerlink" title="3.将项目上传到GitHub"></a>3.将项目上传到GitHub</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin GitHub仓库地址</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-打包项目"><a href="#4-打包项目" class="headerlink" title="4.打包项目"></a>4.打包项目</h2><h4 id="注意：vue-react打包前需要修改配置文件，否则可能无法运行"><a href="#注意：vue-react打包前需要修改配置文件，否则可能无法运行" class="headerlink" title="注意：vue/react打包前需要修改配置文件，否则可能无法运行"></a>注意：vue/react打包前需要修改配置文件，否则可能无法运行</h4><h5 id="Vue-cli2："><a href="#Vue-cli2：" class="headerlink" title="Vue-cli2："></a>Vue-cli2：</h5><ul>
+<li>找到config –&gt; index.js 文件，修改build</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">assetsPublicPath: <span class="string">&#x27;./&#x27;</span>  <span class="comment">// 前面加个点就行</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Vue-cli3"><a href="#Vue-cli3" class="headerlink" title="Vue-cli3:"></a>Vue-cli3:</h5><ul>
+<li>在项目目录下创建vue.config.js文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  publicPath: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="React-cli"><a href="#React-cli" class="headerlink" title="React-cli:"></a>React-cli:</h5><ul>
+<li>在package.json中加入</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;homepage&quot;:&quot;.&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-将打包后的项目上传到GitHub"><a href="#5-将打包后的项目上传到GitHub" class="headerlink" title="5.将打包后的项目上传到GitHub"></a>5.将打包后的项目上传到GitHub</h2><ul>
+<li>执行下面代码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">npm run build // 打包项目</span><br><span class="line">git checkout -b gh-pages //创建并切换到gh-pages分支</span><br><span class="line">git add -f dist // 将dist文件夹提交到gh-pages分支</span><br><span class="line">git commit -m &#x27;create project&#x27; </span><br><span class="line"> // 将dist文件夹提交到github上</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>当项目更新后：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 先上传main分支</span><br><span class="line">git add . </span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 再上传dist文件夹到gh-page分支</span><br><span class="line">git checkout gh-page</span><br><span class="line">git merge main  // 合并main分支内容</span><br><span class="line">npm run build   // 打包gh-page分支下的项目</span><br><span class="line">git add -f dist</span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h2 id="6-开启GitHub-Page"><a href="#6-开启GitHub-Page" class="headerlink" title="6.开启GitHub Page"></a>6.开启GitHub Page</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/6.png" alt="QQ截图20201102165732"></p>
+<h2 id="7-内网穿透"><a href="#7-内网穿透" class="headerlink" title="7.内网穿透"></a>7.内网穿透</h2><h4 id="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"><a href="#如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透" class="headerlink" title="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"></a>如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透</h4><p>市面上有很多内网穿透的软件，这里我介绍一下我使用的<strong>网云穿</strong></p>
+<ul>
+<li>下载app     <a target="_blank" rel="noopener" href="http://xiaomy.net/">http://xiaomy.net/</a> (下载客户端)</li>
+<li>注册账号</li>
+<li>点击<strong>开通隧道</strong> （有一个永久免费的，点击领取）</li>
+<li>编辑隧道</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.1.png" alt="QQ截图20201102170818"></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.2.png" alt="QQ截图20201102170838"></p>
+<ul>
+<li>开启客户端</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.3.png" alt="QQ截图20201102171107"></p>
+<ul>
+<li>点击启动</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/abc/" rel="tag"># abc</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/15/drag/" rel="prev" title="H5新属性---draggable">
+      <i class="fa fa-chevron-left"></i> H5新属性---draggable
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BAVue-React%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">1.创建Vue&#x2F;React项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E5%9B%A0%E4%B8%BA%E9%9C%80%E8%A6%81%E5%B0%86%E6%89%93%E5%8C%85%E5%90%8E%E7%9A%84%E6%96%87%E4%BB%B6%E5%A4%B9dist-build%E4%B9%9F%E4%B8%8A%E4%BC%A0%E5%88%B0GitHub%EF%BC%8C%E6%89%80%E4%BB%A5%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E4%B8%80%E4%B8%8Bgitignore%E6%96%87%E4%BB%B6"><span class="nav-number">1.0.1.</span> <span class="nav-text">注意：因为需要将打包后的文件夹dist&#x2F;build也上传到GitHub，所以需要修改一下gitignore文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-GitHub%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A9%BA%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">2.GitHub创建一个空仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%B0%86%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0GitHub"><span class="nav-number">3.</span> <span class="nav-text">3.将项目上传到GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE"><span class="nav-number">4.</span> <span class="nav-text">4.打包项目</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9Avue-react%E6%89%93%E5%8C%85%E5%89%8D%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%EF%BC%8C%E5%90%A6%E5%88%99%E5%8F%AF%E8%83%BD%E6%97%A0%E6%B3%95%E8%BF%90%E8%A1%8C"><span class="nav-number">4.0.1.</span> <span class="nav-text">注意：vue&#x2F;react打包前需要修改配置文件，否则可能无法运行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Vue-cli2%EF%BC%9A"><span class="nav-number">4.0.1.1.</span> <span class="nav-text">Vue-cli2：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Vue-cli3"><span class="nav-number">4.0.1.2.</span> <span class="nav-text">Vue-cli3:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#React-cli"><span class="nav-number">4.0.1.3.</span> <span class="nav-text">React-cli:</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B0%86%E6%89%93%E5%8C%85%E5%90%8E%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%8A%E4%BC%A0%E5%88%B0GitHub"><span class="nav-number">5.</span> <span class="nav-text">5.将打包后的项目上传到GitHub</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E5%BC%80%E5%90%AFGitHub-Page"><span class="nav-number">6.</span> <span class="nav-text">6.开启GitHub Page</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-number">7.</span> <span class="nav-text">7.内网穿透</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E6%9E%9C%E6%83%B3%E8%A6%81%E4%B8%8D%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AA%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%8B%E7%9A%84%E7%94%B5%E8%84%91%E8%AE%BF%E9%97%AE%E5%88%B0%E6%9C%AC%E6%9C%BA%E8%B5%84%E6%BA%90%E5%8F%AF%E4%BB%A5%E5%B0%9D%E8%AF%95%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-number">7.0.1.</span> <span class="nav-text">如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Ac"
+      src="/images/header-image.jpg">
+  <p class="site-author-name" itemprop="name">Ac</p>
+  <div class="site-description" itemprop="description">MASTER IS A HANDSOME GAY</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ac</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
