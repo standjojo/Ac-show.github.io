@@ -1,85 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>github部署vue、react项目和内网穿透</title>
-    <url>/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
-    <content><![CDATA[<p>记录一下怎么把项目在github服务器上运行起来<br>嘿嘿。。。又是一个白嫖服务器的小技巧！！</p>
-<a id="more"></a>
-
-
-
-<h2 id="1-创建Vue-React项目"><a href="#1-创建Vue-React项目" class="headerlink" title="1.创建Vue/React项目"></a>1.创建Vue/React项目</h2><h4 id="注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件"><a href="#注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件" class="headerlink" title="注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件"></a>注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件</h4><ul>
-<li>Vue删除 /dist</li>
-<li>React 删除 /build</li>
-</ul>
-<h2 id="2-GitHub创建一个空仓库"><a href="#2-GitHub创建一个空仓库" class="headerlink" title="2.GitHub创建一个空仓库"></a>2.GitHub创建一个空仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png" alt="QQ截图20201102164405"></p>
-<h2 id="3-将项目上传到GitHub"><a href="#3-将项目上传到GitHub" class="headerlink" title="3.将项目上传到GitHub"></a>3.将项目上传到GitHub</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin GitHub仓库地址</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="4-打包项目"><a href="#4-打包项目" class="headerlink" title="4.打包项目"></a>4.打包项目</h2><h4 id="注意：vue-react打包前需要修改配置文件，否则可能无法运行"><a href="#注意：vue-react打包前需要修改配置文件，否则可能无法运行" class="headerlink" title="注意：vue/react打包前需要修改配置文件，否则可能无法运行"></a>注意：vue/react打包前需要修改配置文件，否则可能无法运行</h4><h5 id="Vue-cli2："><a href="#Vue-cli2：" class="headerlink" title="Vue-cli2："></a>Vue-cli2：</h5><ul>
-<li>找到config –&gt; index.js 文件，修改build</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">assetsPublicPath: <span class="string">&#x27;./&#x27;</span>  <span class="comment">// 前面加个点就行</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="Vue-cli3"><a href="#Vue-cli3" class="headerlink" title="Vue-cli3:"></a>Vue-cli3:</h5><ul>
-<li>在项目目录下创建vue.config.js文件</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  publicPath: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h5 id="React-cli"><a href="#React-cli" class="headerlink" title="React-cli:"></a>React-cli:</h5><ul>
-<li>在package.json中加入</li>
-</ul>
-<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;homepage&quot;:&quot;.&quot;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="5-将打包后的项目上传到GitHub"><a href="#5-将打包后的项目上传到GitHub" class="headerlink" title="5.将打包后的项目上传到GitHub"></a>5.将打包后的项目上传到GitHub</h2><ul>
-<li>执行下面代码</li>
-</ul>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm run build // 打包项目</span><br><span class="line">git checkout -b gh-pages //创建并切换到gh-pages分支</span><br><span class="line">git add -f dist // 将dist文件夹提交到gh-pages分支</span><br><span class="line">git commit -m &#x27;create project&#x27; </span><br><span class="line"> // 将dist文件夹提交到github上</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
-
-
-
-<ul>
-<li>当项目更新后：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// 先上传main分支</span><br><span class="line">git add . </span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 再上传dist文件夹到gh-page分支</span><br><span class="line">git checkout gh-page</span><br><span class="line">git merge main  // 合并main分支内容</span><br><span class="line">npm run build   // 打包gh-page分支下的项目</span><br><span class="line">git add -f dist</span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-</li>
-</ul>
-<h2 id="6-开启GitHub-Page"><a href="#6-开启GitHub-Page" class="headerlink" title="6.开启GitHub Page"></a>6.开启GitHub Page</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/6.png" alt="QQ截图20201102165732"></p>
-<h2 id="7-内网穿透"><a href="#7-内网穿透" class="headerlink" title="7.内网穿透"></a>7.内网穿透</h2><h4 id="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"><a href="#如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透" class="headerlink" title="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"></a>如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透</h4><p>市面上有很多内网穿透的软件，这里我介绍一下我使用的<strong>网云穿</strong></p>
-<ul>
-<li>下载app     <a href="http://xiaomy.net/">http://xiaomy.net/</a> (下载客户端)</li>
-<li>注册账号</li>
-<li>点击<strong>开通隧道</strong> （有一个永久免费的，点击领取）</li>
-<li>编辑隧道</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.1.png" alt="QQ截图20201102170818"></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.2.png" alt="QQ截图20201102170838"></p>
-<ul>
-<li>开启客户端</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.3.png" alt="QQ截图20201102171107"></p>
-<ul>
-<li>点击启动</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Vue/React</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>H5新属性---draggable</title>
     <url>/2019/11/15/drag/</url>
     <content><![CDATA[<p>上次做项目有拖动排序的功能，用得实在太少，记录一下</p>
@@ -141,114 +62,10 @@
 <p><strong>effectAllowed是给被拖动元素设置的，dropEffect是给鼠标经过元素设置的，只有当两属性值相同是，被拖元素才能放到鼠标经过的元素的位置</strong></p>
 ]]></content>
       <categories>
-        <category>HTML</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>GitHub + Hexo 搭建博客</title>
-    <url>/2019/10/06/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>这是我一边搭建一边写的，按照步骤来应该没什么问题</p>
-<a id="more"></a>
-
-
-
-<h2 id="1-准备环境"><a href="#1-准备环境" class="headerlink" title="1.准备环境"></a>1.准备环境</h2><h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p><strong>去官网下载安装就行</strong></p>
-<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p><strong>去官网下载安装</strong></p>
-<h4 id="安装hexo-cli"><a href="#安装hexo-cli" class="headerlink" title="安装hexo-cli"></a>安装hexo-cli</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g // 现在npm和node都是绑定安装</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="2-本地安装Hexo"><a href="#2-本地安装Hexo" class="headerlink" title="2.本地安装Hexo"></a>2.本地安装Hexo</h2><h4 id="2-1搭建hexo"><a href="#2-1搭建hexo" class="headerlink" title="2.1搭建hexo"></a>2.1搭建hexo</h4><p><strong>找一个目录新建一个文件夹用于存放你的blog项目</strong></p>
-<p><strong>打开控制台，cd到你的文件夹下</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.1.png"></p>
-<h4 id="2-2初始化项目"><a href="#2-2初始化项目" class="headerlink" title="2.2初始化项目"></a>2.2初始化项目</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p><strong>初始化项目后通过一下命令就可以在本地访问了</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s </span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.2.png" alt="QQ截图20201107141639"></p>
-<h2 id="3-创建GitHub仓库"><a href="#3-创建GitHub仓库" class="headerlink" title="3.创建GitHub仓库"></a>3.创建GitHub仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.1.png" alt="QQ截图20201107141422"></p>
-<h2 id="4-将GitHub仓库与hexo项目连接起来"><a href="#4-将GitHub仓库与hexo项目连接起来" class="headerlink" title="4.将GitHub仓库与hexo项目连接起来"></a>4.将GitHub仓库与hexo项目连接起来</h2><h4 id="4-1-生成ssh密钥"><a href="#4-1-生成ssh密钥" class="headerlink" title="4.1 生成ssh密钥"></a>4.1 生成ssh密钥</h4><p><strong>打开控制台输入</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#x27;github绑定的email&#x27;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.1.1.png" alt="QQ截图20201107142153"></p>
-<p><strong>生成ssh成功后</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.1.2.png" alt="QQ截图20201107152555"></p>
-<h4 id="4-2-设置GitHub"><a href="#4-2-设置GitHub" class="headerlink" title="4.2 设置GitHub"></a>4.2 设置GitHub</h4><p><strong>打开GitHub个人设置</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.2.1.png" alt="QQ截图20201107142902"></p>
-<p><strong>测试连接GitHub</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.2.2.png" alt="QQ截图20201107142648"></p>
-<h4 id="4-3-配置本地hexo项目下的-config-yml"><a href="#4-3-配置本地hexo项目下的-config-yml" class="headerlink" title="4.3 配置本地hexo项目下的_config.yml"></a>4.3 配置本地hexo项目下的_config.yml</h4><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.3.png" alt="QQ截图20201107143151"></p>
-<h4 id="4-4-博客发布到GitHub仓库"><a href="#4-4-博客发布到GitHub仓库" class="headerlink" title="4.4 博客发布到GitHub仓库"></a>4.4 博客发布到GitHub仓库</h4><p><strong>安装依赖</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.4.png" alt="QQ截图20201107143638"></p>
-<p><strong>上传GitHub</strong></p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo d </span><br></pre></td></tr></table></figure>
-
-<p>现在可以直接访问了：<strong>GitHub用户名.github.io</strong></p>
-<p><strong>注意：可能有缓存，要等一会</strong></p>
-<h2 id="5-配置域名"><a href="#5-配置域名" class="headerlink" title="5.配置域名"></a>5.配置域名</h2><p><strong>先买一个域名，要不然还是用GitHub分配给你的域名把</strong></p>
-<p><strong>先ping一下GitHub给你的域名</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.1.png" alt="QQ截图20201107144754"></p>
-<p><strong>复制ip</strong></p>
-<p><strong>解析域名</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.2.png" alt="QQ截图20201107145123"></p>
-<p><strong>添加记录</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.3.png" alt="QQ截图20201107145436"></p>
-<p><strong>创建CNAME文件</strong></p>
-<p><strong>进入你博客目录下的source文件夹，新建一个CNAME文件，将你的域名写进去，CNAME没有后缀名！！</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.4.png" alt="QQ截图20201107145718"></p>
-<p><strong>重新上传 hexo d</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.5.png" alt="QQ截图20201107145859"></p>
-<p>现在用你自己的域名应该是上面这张图片的样子</p>
-<p><strong>进入你GitHub仓库的setting下设置一下就好了</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.6.png" alt="QQ截图20201107150031"></p>
-<p><strong>现在应该可以直接访问了</strong></p>
-<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.7.png" alt="QQ截图20201107150046"></p>
-]]></content>
-      <categories>
-        <category>hexo</category>
-      </categories>
-      <tags>
-        <tag>net</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>防抖和节流以及函数柯里化</title>
-    <url>/2020/01/02/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/</url>
-    <content><![CDATA[<p>写两个最基本的防抖和节流，以后找的时候方便</p>
-<a id="more"></a>
-
-<h3 id="防抖（Debouncing）"><a href="#防抖（Debouncing）" class="headerlink" title="防抖（Debouncing）"></a>防抖（Debouncing）</h3><p>防抖：阻止事件连续触发，在规定时间内多次触发事件只执行最后一次，中间触发的事件都不会执行</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> timerOut;</span><br><span class="line">	<span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">clearTimeout</span>(timerOut)</span><br><span class="line">		timerOut = <span class="built_in">setTimeout</span>(fun, timer)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h3><p>节流：在规定时间内只执行一次，比如规定一秒内执行一次，那么一秒内多次触发也只会执行一次，不过执行的是第一次，后面的都取消了。</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> isRunning = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isRunning) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        isRunning = <span class="literal">true</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fun()</span><br><span class="line">            isRunning = <span class="literal">false</span></span><br><span class="line">        &#125;, timer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>防抖和节流的原理都是使用定时器来执行函数，先给函数设置一个先行条件，如果不满足先行条件，那么定时器会在就绪前就被清除</strong></p>
-<h3 id="柯里化（currying）"><a href="#柯里化（currying）" class="headerlink" title="柯里化（currying）"></a>柯里化（currying）</h3><p>柯里化：网上看见好像面试可能会问，先记录下来，为以后做准备</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function sum() &#123;</span><br><span class="line">	let arr &#x3D; [];</span><br><span class="line">    arr.push(...arguments); &#x2F;&#x2F; 接收第一个括号的参数</span><br><span class="line">    function next() &#123;</span><br><span class="line">    	arr.push(...arguments); </span><br><span class="line">    	return next; &#x2F;&#x2F; 循环接收后面所有括号传过来的参数</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 重写next原型上的toString()方法</span><br><span class="line">    next.toString &#x3D; function () &#123;</span><br><span class="line">    	return arr.reduce(function (a, b) &#123;</span><br><span class="line">    		return a + b;</span><br><span class="line">    	&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">	return next; &#x2F;&#x2F; 返回next函数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum(1)(2， 2)(3)()(1) &#x2F;&#x2F; 9</span><br><span class="line">console.log(typeof sum(1)(1)(2)(5)) &#x2F;&#x2F; function</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>柯里化的的实现是利用了函数原型链上的toString()方法，他会在函数需要表达成字符穿时使用：比如</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">a + <span class="string">&#x27;&#x27;</span> <span class="comment">// function a() &#123;&#125;</span></span><br><span class="line"><span class="comment">// 上面 a + &#x27;&#x27; 其实是a函数先调用了a.toString()</span></span><br><span class="line"><span class="comment">// 所以上面的式子可以理解为 a.toString() + &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>所以柯里化的主要底层逻辑就是函数原型的重写</strong></p>
-]]></content>
-      <categories>
-        <category>JS</category>
-      </categories>
-      <tags>
-        <tag>前端</tag>
+        <tag>HTML</tag>
       </tags>
   </entry>
   <entry>
@@ -390,10 +207,194 @@
 <p>​    第三个值必须为一个有效的宽度值，并且它会被当作<code>flex-basis</code>的值。</p>
 ]]></content>
       <categories>
-        <category>CSS</category>
+        <category>前端</category>
       </categories>
       <tags>
-        <tag>前端</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>github部署vue、react项目和内网穿透</title>
+    <url>/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/</url>
+    <content><![CDATA[<p>记录一下怎么把项目在github服务器上运行起来<br>嘿嘿。。。又是一个白嫖服务器的小技巧！！</p>
+<a id="more"></a>
+
+
+
+<h2 id="1-创建Vue-React项目"><a href="#1-创建Vue-React项目" class="headerlink" title="1.创建Vue/React项目"></a>1.创建Vue/React项目</h2><h4 id="注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件"><a href="#注意：因为需要将打包后的文件夹dist-build也上传到GitHub，所以需要修改一下gitignore文件" class="headerlink" title="注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件"></a>注意：因为需要将打包后的文件夹dist/build也上传到GitHub，所以需要修改一下gitignore文件</h4><ul>
+<li>Vue删除 /dist</li>
+<li>React 删除 /build</li>
+</ul>
+<h2 id="2-GitHub创建一个空仓库"><a href="#2-GitHub创建一个空仓库" class="headerlink" title="2.GitHub创建一个空仓库"></a>2.GitHub创建一个空仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/2.png" alt="QQ截图20201102164405"></p>
+<h2 id="3-将项目上传到GitHub"><a href="#3-将项目上传到GitHub" class="headerlink" title="3.将项目上传到GitHub"></a>3.将项目上传到GitHub</h2><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &#x27;first commit&#x27;</span><br><span class="line">git branch -M main</span><br><span class="line">git remote add origin GitHub仓库地址</span><br><span class="line">git push -u origin main</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-打包项目"><a href="#4-打包项目" class="headerlink" title="4.打包项目"></a>4.打包项目</h2><h4 id="注意：vue-react打包前需要修改配置文件，否则可能无法运行"><a href="#注意：vue-react打包前需要修改配置文件，否则可能无法运行" class="headerlink" title="注意：vue/react打包前需要修改配置文件，否则可能无法运行"></a>注意：vue/react打包前需要修改配置文件，否则可能无法运行</h4><h5 id="Vue-cli2："><a href="#Vue-cli2：" class="headerlink" title="Vue-cli2："></a>Vue-cli2：</h5><ul>
+<li>找到config –&gt; index.js 文件，修改build</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">assetsPublicPath: <span class="string">&#x27;./&#x27;</span>  <span class="comment">// 前面加个点就行</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="Vue-cli3"><a href="#Vue-cli3" class="headerlink" title="Vue-cli3:"></a>Vue-cli3:</h5><ul>
+<li>在项目目录下创建vue.config.js文件</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  publicPath: <span class="string">&#x27;./&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="React-cli"><a href="#React-cli" class="headerlink" title="React-cli:"></a>React-cli:</h5><ul>
+<li>在package.json中加入</li>
+</ul>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&quot;homepage&quot;:&quot;.&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-将打包后的项目上传到GitHub"><a href="#5-将打包后的项目上传到GitHub" class="headerlink" title="5.将打包后的项目上传到GitHub"></a>5.将打包后的项目上传到GitHub</h2><ul>
+<li>执行下面代码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm run build // 打包项目</span><br><span class="line">git checkout -b gh-pages //创建并切换到gh-pages分支</span><br><span class="line">git add -f dist // 将dist文件夹提交到gh-pages分支</span><br><span class="line">git commit -m &#x27;create project&#x27; </span><br><span class="line"> // 将dist文件夹提交到github上</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>当项目更新后：<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">// 先上传main分支</span><br><span class="line">git add . </span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git push</span><br><span class="line"></span><br><span class="line">// 再上传dist文件夹到gh-page分支</span><br><span class="line">git checkout gh-page</span><br><span class="line">git merge main  // 合并main分支内容</span><br><span class="line">npm run build   // 打包gh-page分支下的项目</span><br><span class="line">git add -f dist</span><br><span class="line">git commit -m &#x27;****&#x27;</span><br><span class="line">git subtree push --prefix dist origin gh-pages</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h2 id="6-开启GitHub-Page"><a href="#6-开启GitHub-Page" class="headerlink" title="6.开启GitHub Page"></a>6.开启GitHub Page</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/6.png" alt="QQ截图20201102165732"></p>
+<h2 id="7-内网穿透"><a href="#7-内网穿透" class="headerlink" title="7.内网穿透"></a>7.内网穿透</h2><h4 id="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"><a href="#如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透" class="headerlink" title="如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透"></a>如果想要不在同一个局域网下的电脑访问到本机资源可以尝试内网穿透</h4><p>市面上有很多内网穿透的软件，这里我介绍一下我使用的<strong>网云穿</strong></p>
+<ul>
+<li>下载app     <a href="http://xiaomy.net/">http://xiaomy.net/</a> (下载客户端)</li>
+<li>注册账号</li>
+<li>点击<strong>开通隧道</strong> （有一个永久免费的，点击领取）</li>
+<li>编辑隧道</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.1.png" alt="QQ截图20201102170818"></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.2.png" alt="QQ截图20201102170838"></p>
+<ul>
+<li>开启客户端</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/github%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/7.3.png" alt="QQ截图20201102171107"></p>
+<ul>
+<li>点击启动</li>
+</ul>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue/React</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>GitHub + Hexo 搭建博客</title>
+    <url>/2019/10/06/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>这是我一边搭建一边写的，按照步骤来应该没什么问题</p>
+<a id="more"></a>
+
+
+
+<h2 id="1-准备环境"><a href="#1-准备环境" class="headerlink" title="1.准备环境"></a>1.准备环境</h2><h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p><strong>去官网下载安装就行</strong></p>
+<h4 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h4><p><strong>去官网下载安装</strong></p>
+<h4 id="安装hexo-cli"><a href="#安装hexo-cli" class="headerlink" title="安装hexo-cli"></a>安装hexo-cli</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g // 现在npm和node都是绑定安装</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="2-本地安装Hexo"><a href="#2-本地安装Hexo" class="headerlink" title="2.本地安装Hexo"></a>2.本地安装Hexo</h2><h4 id="2-1搭建hexo"><a href="#2-1搭建hexo" class="headerlink" title="2.1搭建hexo"></a>2.1搭建hexo</h4><p><strong>找一个目录新建一个文件夹用于存放你的blog项目</strong></p>
+<p><strong>打开控制台，cd到你的文件夹下</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.1.png"></p>
+<h4 id="2-2初始化项目"><a href="#2-2初始化项目" class="headerlink" title="2.2初始化项目"></a>2.2初始化项目</h4><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p><strong>初始化项目后通过一下命令就可以在本地访问了</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s </span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/2.2.png" alt="QQ截图20201107141639"></p>
+<h2 id="3-创建GitHub仓库"><a href="#3-创建GitHub仓库" class="headerlink" title="3.创建GitHub仓库"></a>3.创建GitHub仓库</h2><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/3.1.png" alt="QQ截图20201107141422"></p>
+<h2 id="4-将GitHub仓库与hexo项目连接起来"><a href="#4-将GitHub仓库与hexo项目连接起来" class="headerlink" title="4.将GitHub仓库与hexo项目连接起来"></a>4.将GitHub仓库与hexo项目连接起来</h2><h4 id="4-1-生成ssh密钥"><a href="#4-1-生成ssh密钥" class="headerlink" title="4.1 生成ssh密钥"></a>4.1 生成ssh密钥</h4><p><strong>打开控制台输入</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &#x27;github绑定的email&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.1.1.png" alt="QQ截图20201107142153"></p>
+<p><strong>生成ssh成功后</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.1.2.png" alt="QQ截图20201107152555"></p>
+<h4 id="4-2-设置GitHub"><a href="#4-2-设置GitHub" class="headerlink" title="4.2 设置GitHub"></a>4.2 设置GitHub</h4><p><strong>打开GitHub个人设置</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.2.1.png" alt="QQ截图20201107142902"></p>
+<p><strong>测试连接GitHub</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.2.2.png" alt="QQ截图20201107142648"></p>
+<h4 id="4-3-配置本地hexo项目下的-config-yml"><a href="#4-3-配置本地hexo项目下的-config-yml" class="headerlink" title="4.3 配置本地hexo项目下的_config.yml"></a>4.3 配置本地hexo项目下的_config.yml</h4><p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.3.png" alt="QQ截图20201107143151"></p>
+<h4 id="4-4-博客发布到GitHub仓库"><a href="#4-4-博客发布到GitHub仓库" class="headerlink" title="4.4 博客发布到GitHub仓库"></a>4.4 博客发布到GitHub仓库</h4><p><strong>安装依赖</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/4.4.png" alt="QQ截图20201107143638"></p>
+<p><strong>上传GitHub</strong></p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">hexo d </span><br></pre></td></tr></table></figure>
+
+<p>现在可以直接访问了：<strong>GitHub用户名.github.io</strong></p>
+<p><strong>注意：可能有缓存，要等一会</strong></p>
+<h2 id="5-配置域名"><a href="#5-配置域名" class="headerlink" title="5.配置域名"></a>5.配置域名</h2><p><strong>先买一个域名，要不然还是用GitHub分配给你的域名把</strong></p>
+<p><strong>先ping一下GitHub给你的域名</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.1.png" alt="QQ截图20201107144754"></p>
+<p><strong>复制ip</strong></p>
+<p><strong>解析域名</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.2.png" alt="QQ截图20201107145123"></p>
+<p><strong>添加记录</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.3.png" alt="QQ截图20201107145436"></p>
+<p><strong>创建CNAME文件</strong></p>
+<p><strong>进入你博客目录下的source文件夹，新建一个CNAME文件，将你的域名写进去，CNAME没有后缀名！！</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.4.png" alt="QQ截图20201107145718"></p>
+<p><strong>重新上传 hexo d</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.5.png" alt="QQ截图20201107145859"></p>
+<p>现在用你自己的域名应该是上面这张图片的样子</p>
+<p><strong>进入你GitHub仓库的setting下设置一下就好了</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.6.png" alt="QQ截图20201107150031"></p>
+<p><strong>现在应该可以直接访问了</strong></p>
+<p><img src="https://raw.githubusercontent.com/Ac-show/blog-images/main/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/5.7.png" alt="QQ截图20201107150046"></p>
+]]></content>
+      <categories>
+        <category>B技术</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>防抖和节流以及函数柯里化</title>
+    <url>/2020/01/02/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/</url>
+    <content><![CDATA[<p>写两个最基本的防抖和节流，以后找的时候方便</p>
+<a id="more"></a>
+
+<h3 id="防抖（Debouncing）"><a href="#防抖（Debouncing）" class="headerlink" title="防抖（Debouncing）"></a>防抖（Debouncing）</h3><p>防抖：阻止事件连续触发，在规定时间内多次触发事件只执行最后一次，中间触发的事件都不会执行</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> timerOut;</span><br><span class="line">	<span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">clearTimeout</span>(timerOut)</span><br><span class="line">		timerOut = <span class="built_in">setTimeout</span>(fun, timer)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h3><p>节流：在规定时间内只执行一次，比如规定一秒内执行一次，那么一秒内多次触发也只会执行一次，不过执行的是第一次，后面的都取消了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> isRunning = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isRunning) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        isRunning = <span class="literal">true</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fun()</span><br><span class="line">            isRunning = <span class="literal">false</span></span><br><span class="line">        &#125;, timer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>防抖和节流的原理都是使用定时器来执行函数，先给函数设置一个先行条件，如果不满足先行条件，那么定时器会在就绪前就被清除</strong></p>
+<h3 id="柯里化（currying）"><a href="#柯里化（currying）" class="headerlink" title="柯里化（currying）"></a>柯里化（currying）</h3><p>柯里化：网上看见好像面试可能会问，先记录下来，为以后做准备</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">function sum() &#123;</span><br><span class="line">	let arr &#x3D; [];</span><br><span class="line">    arr.push(...arguments); &#x2F;&#x2F; 接收第一个括号的参数</span><br><span class="line">    function next() &#123;</span><br><span class="line">    	arr.push(...arguments); </span><br><span class="line">    	return next; &#x2F;&#x2F; 循环接收后面所有括号传过来的参数</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 重写next原型上的toString()方法</span><br><span class="line">    next.toString &#x3D; function () &#123;</span><br><span class="line">    	return arr.reduce(function (a, b) &#123;</span><br><span class="line">    		return a + b;</span><br><span class="line">    	&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">	return next; &#x2F;&#x2F; 返回next函数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum(1)(2， 2)(3)()(1) &#x2F;&#x2F; 9</span><br><span class="line">console.log(typeof sum(1)(1)(2)(5)) &#x2F;&#x2F; function</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>柯里化的的实现是利用了函数原型链上的toString()方法，他会在函数需要表达成字符穿时使用：比如</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">a + <span class="string">&#x27;&#x27;</span> <span class="comment">// function a() &#123;&#125;</span></span><br><span class="line"><span class="comment">// 上面 a + &#x27;&#x27; 其实是a函数先调用了a.toString()</span></span><br><span class="line"><span class="comment">// 所以上面的式子可以理解为 a.toString() + &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>所以柯里化的主要底层逻辑就是函数原型的重写</strong></p>
+]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>JS</tag>
+        <tag>WEB性能优化</tag>
       </tags>
   </entry>
 </search>
