@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="写两个最基本的防抖和节流，以后找的时候方便">
+  <meta name="description" content="设计模式其实就是一些特定问题的固定解法。。。。。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="防抖和节流以及函数柯里化">
-<meta property="og:url" content="http://example.com/2020/01/02/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/index.html">
+<meta property="og:title" content="发布订略模式">
+<meta property="og:url" content="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="帅气哥哥的博客">
-<meta property="og:description" content="写两个最基本的防抖和节流，以后找的时候方便">
+<meta property="og:description" content="设计模式其实就是一些特定问题的固定解法。。。。。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-01-02T13:09:52.470Z">
-<meta property="article:modified_time" content="2020-11-10T08:53:52.800Z">
+<meta property="article:published_time" content="2020-12-01T15:01:54.198Z">
+<meta property="article:modified_time" content="2020-12-01T15:02:21.461Z">
 <meta property="article:author" content="Ac">
 <meta property="article:tag" content="JS">
-<meta property="article:tag" content="WEB性能优化">
+<meta property="article:tag" content="理论知识">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/01/02/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>防抖和节流以及函数柯里化 | 帅气哥哥的博客</title>
+  <title>发布订略模式 | 帅气哥哥的博客</title>
   
 
 
@@ -197,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/01/02/%E9%98%B2%E6%8A%96%E5%92%8C%E8%8A%82%E6%B5%81%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E6%9F%AF%E9%87%8C%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header-image.jpg">
@@ -210,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          防抖和节流以及函数柯里化
+          发布订略模式
         </h1>
 
         <div class="post-meta">
@@ -219,16 +219,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-01-02 21:09:52" itemprop="dateCreated datePublished" datetime="2020-01-02T21:09:52+08:00">2020-01-02</time>
+              <time title="创建时间：2020-12-01 23:01:54 / 修改时间：23:02:21" itemprop="dateCreated datePublished" datetime="2020-12-01T23:01:54+08:00">2020-12-01</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-11-10 16:53:52" itemprop="dateModified" datetime="2020-11-10T16:53:52+08:00">2020-11-10</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -250,29 +244,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>写两个最基本的防抖和节流，以后找的时候方便</p>
+        <p>设计模式其实就是一些特定问题的固定解法。。。。。</p>
 <a id="more"></a>
 
-<h3 id="防抖（Debouncing）"><a href="#防抖（Debouncing）" class="headerlink" title="防抖（Debouncing）"></a>防抖（Debouncing）</h3><p>防抖：阻止事件连续触发，在规定时间内多次触发事件只执行最后一次，中间触发的事件都不会执行</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">let</span> timerOut;</span><br><span class="line">	<span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="built_in">clearTimeout</span>(timerOut)</span><br><span class="line">		timerOut = <span class="built_in">setTimeout</span>(fun, timer)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>其实就是让所有的对象与对象之间的调用变成所有的对象都去调用一个对象，你比如说A、B、C三个对象，A要去调用B里面的b，B要去调用C里面的c，C要去调用A里面的a，这样的话这三个对象就完全耦合在一起了，只要其中一个对象丢失，那么另外两个对象就都没用了。</p>
+<p>所以发布订阅就相当于在这些对象里面加一个中间者，A、B、C把a、b、c都放到Observe里面，当要调用时直接去Observe里面拿就好了</p>
+<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.callBacks = &#123;&#125; <span class="comment">// 创建一个空对象用于保存所有的事件以及回调</span></span><br><span class="line">  &#125;</span><br><span class="line">  $on(name, fun) &#123; <span class="comment">// 发布时间，将事件名和事件函数都存入callBacks</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.callBacks[name]) &#123;</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name].push(fun)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name] = []</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name].push(fun)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $emit(name, obj) &#123; <span class="comment">// 订略事件，调用callBacks中的已存在事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.callBacks[name]) &#123;</span><br><span class="line">      <span class="keyword">let</span> call = <span class="built_in">this</span>.callBacks[name]</span><br><span class="line">      call.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        v.call(<span class="built_in">this</span>, obj)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $off(name) &#123; <span class="comment">// 清除事件</span></span><br><span class="line">    <span class="built_in">this</span>.callBacks[name] = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<h3 id="节流（Throttle）"><a href="#节流（Throttle）" class="headerlink" title="节流（Throttle）"></a>节流（Throttle）</h3><p>节流：在规定时间内只执行一次，比如规定一秒内执行一次，那么一秒内多次触发也只会执行一次，不过执行的是第一次，后面的都取消了。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fun, timer</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> isRunning = <span class="literal">false</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isRunning) &#123;</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        isRunning = <span class="literal">true</span></span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fun()</span><br><span class="line">            isRunning = <span class="literal">false</span></span><br><span class="line">        &#125;, timer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面代码我实验了一下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">observer.$on(<span class="string">&#x27;event1&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event1事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;event1&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$on(<span class="string">&#x27;event1&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event1事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;再次调用event1&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$on(<span class="string">&#x27;event2&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event2事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;event2&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$emit(<span class="string">&#x27;event1&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;eeeee&#x27;</span> &#125;) <span class="comment">// 发布event1事件</span></span><br><span class="line"><span class="comment">// event1 &#123; name: &#x27;eeeee&#x27; &#125;</span></span><br><span class="line"><span class="comment">// 再次调用event1 &#123; name: &#x27;eeeee&#x27; &#125;</span></span><br><span class="line">observer.$emit(<span class="string">&#x27;event2&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;wwwww&#x27;</span> &#125;) <span class="comment">// 发布event2事件</span></span><br><span class="line"><span class="comment">// event2 &#123; name: &#x27;wwwww&#x27; &#125;</span></span><br><span class="line">observer.$off(<span class="string">&#x27;event1&#x27;</span>) <span class="comment">// 清除event1事件的所有订略</span></span><br><span class="line">observer.$emit(<span class="string">&#x27;event1&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;ssss&#x27;</span> &#125;) <span class="comment">// 重新发布event1事件（没反应）</span></span><br></pre></td></tr></table></figure>
 
-
-
-<p><strong>防抖和节流的原理都是使用定时器来执行函数，先给函数设置一个先行条件，如果不满足先行条件，那么定时器会在就绪前就被清除</strong></p>
-<h3 id="柯里化（currying）"><a href="#柯里化（currying）" class="headerlink" title="柯里化（currying）"></a>柯里化（currying）</h3><p>柯里化：网上看见好像面试可能会问，先记录下来，为以后做准备</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function sum() &#123;</span><br><span class="line">	let arr &#x3D; [];</span><br><span class="line">    arr.push(...arguments); &#x2F;&#x2F; 接收第一个括号的参数</span><br><span class="line">    function next() &#123;</span><br><span class="line">    	arr.push(...arguments); </span><br><span class="line">    	return next; &#x2F;&#x2F; 循环接收后面所有括号传过来的参数</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F; 重写next原型上的toString()方法</span><br><span class="line">    next.toString &#x3D; function () &#123;</span><br><span class="line">    	return arr.reduce(function (a, b) &#123;</span><br><span class="line">    		return a + b;</span><br><span class="line">    	&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">	return next; &#x2F;&#x2F; 返回next函数</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum(1)(2， 2)(3)()(1) &#x2F;&#x2F; 9</span><br><span class="line">console.log(typeof sum(1)(1)(2)(5)) &#x2F;&#x2F; function</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>柯里化的的实现是利用了函数原型链上的toString()方法，他会在函数需要表达成字符穿时使用：比如</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">a + <span class="string">&#x27;&#x27;</span> <span class="comment">// function a() &#123;&#125;</span></span><br><span class="line"><span class="comment">// 上面 a + &#x27;&#x27; 其实是a函数先调用了a.toString()</span></span><br><span class="line"><span class="comment">// 所以上面的式子可以理解为 a.toString() + &#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>所以柯里化的主要底层逻辑就是函数原型的重写</strong></p>
 
     </div>
 
@@ -302,7 +287,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/JS/" rel="tag"># JS</a>
-              <a href="/tags/WEB%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag"># WEB性能优化</a>
+              <a href="/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" rel="tag"># 理论知识</a>
           </div>
 
         
@@ -311,13 +296,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2019/12/04/GitHub%E9%83%A8%E7%BD%B2vue%E3%80%81react%E9%A1%B9%E7%9B%AE%E5%92%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" rel="prev" title="github部署vue、react项目和内网穿透">
-      <i class="fa fa-chevron-left"></i> github部署vue、react项目和内网穿透
+    <a href="/2020/11/18/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/" rel="prev" title="浏览器缓存">
+      <i class="fa fa-chevron-left"></i> 浏览器缓存
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/05/16/Vue%20Router%E4%BD%BF%E7%94%A8%EF%BC%88%E7%AE%80%E6%B4%81%E7%89%88%EF%BC%89/" rel="next" title="Vue Router使用（简洁版）">
-      Vue Router使用（简洁版） <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -376,7 +358,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E6%8A%96%EF%BC%88Debouncing%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">防抖（Debouncing）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%82%E6%B5%81%EF%BC%88Throttle%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">节流（Throttle）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%AF%E9%87%8C%E5%8C%96%EF%BC%88currying%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">柯里化（currying）</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">发布订阅模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现：</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

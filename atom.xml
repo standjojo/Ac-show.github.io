@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2020-11-18T04:14:24.622Z</updated>
+  <updated>2020-12-01T15:02:21.461Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>发布订略模式</title>
+    <link href="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/</id>
+    <published>2020-12-01T15:01:54.198Z</published>
+    <updated>2020-12-01T15:02:21.461Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;设计模式其实就是一些特定问题的固定解法。。。。。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="前端" scheme="http://example.com/categories/%E5%89%8D%E7%AB%AF/"/>
+    
+    
+    <category term="JS" scheme="http://example.com/tags/JS/"/>
+    
+    <category term="理论知识" scheme="http://example.com/tags/%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/"/>
+    
+  </entry>
   
   <entry>
     <title>浏览器缓存</title>
@@ -40,7 +61,7 @@
     <link href="http://example.com/2020/06/17/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AE%9E%E7%8E%B0/"/>
     <id>http://example.com/2020/06/17/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E7%9A%84%E5%AE%9E%E7%8E%B0/</id>
     <published>2020-06-17T12:10:29.591Z</published>
-    <updated>2020-06-17T12:13:08.841Z</updated>
+    <updated>2020-12-01T15:00:49.524Z</updated>
     
     
     <summary type="html">&lt;p&gt;深拷贝的实现，有空更新一下&lt;/p&gt;</summary>
@@ -51,6 +72,8 @@
     
     
     <category term="JS" scheme="http://example.com/tags/JS/"/>
+    
+    <category term="算法" scheme="http://example.com/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
