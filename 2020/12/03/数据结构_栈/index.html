@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="设计模式其实就是一些特定问题的固定解法。。。。。">
+  <meta name="description" content="数据结构和算法。。。冲啊！！！！">
 <meta property="og:type" content="article">
-<meta property="og:title" content="发布订略模式">
-<meta property="og:url" content="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="数据结构_栈">
+<meta property="og:url" content="http://example.com/2020/12/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_%E6%A0%88/index.html">
 <meta property="og:site_name" content="帅气哥哥的博客">
-<meta property="og:description" content="设计模式其实就是一些特定问题的固定解法。。。。。">
+<meta property="og:description" content="数据结构和算法。。。冲啊！！！！">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2020-12-01T15:01:54.198Z">
-<meta property="article:modified_time" content="2020-12-03T13:45:47.445Z">
+<meta property="article:published_time" content="2020-12-03T13:48:06.726Z">
+<meta property="article:modified_time" content="2020-12-03T13:50:11.281Z">
 <meta property="article:author" content="Ac">
 <meta property="article:tag" content="JS">
-<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
+<link rel="canonical" href="http://example.com/2020/12/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_%E6%A0%88/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>发布订略模式 | 帅气哥哥的博客</title>
+  <title>数据结构_栈 | 帅气哥哥的博客</title>
   
 
 
@@ -197,7 +197,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/01/%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/12/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header-image.jpg">
@@ -210,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          发布订略模式
+          数据结构_栈
         </h1>
 
         <div class="post-meta">
@@ -219,16 +219,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-12-01 23:01:54" itemprop="dateCreated datePublished" datetime="2020-12-01T23:01:54+08:00">2020-12-01</time>
+              <time title="创建时间：2020-12-03 21:48:06 / 修改时间：21:50:11" itemprop="dateCreated datePublished" datetime="2020-12-03T21:48:06+08:00">2020-12-03</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-12-03 21:45:47" itemprop="dateModified" datetime="2020-12-03T21:45:47+08:00">2020-12-03</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -250,19 +244,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>设计模式其实就是一些特定问题的固定解法。。。。。</p>
+        <p>数据结构和算法。。。冲啊！！！！</p>
 <a id="more"></a>
 
 
+<h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><h3 id="特点："><a href="#特点：" class="headerlink" title="特点："></a>特点：</h3><ul>
+<li>先进后出，后进先出</li>
+</ul>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li>push：压入栈</li>
+<li>pop：弹出栈顶元素</li>
+<li>peek：查看栈顶元素</li>
+<li>size：获取栈的元素个数</li>
+<li>isEmpty：查看栈是否为空</li>
+<li>toString</li>
+</ul>
+<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span> </span>&#123;</span><br><span class="line">  #stack = []</span><br><span class="line">  <span class="comment">// 压入栈</span></span><br><span class="line">  <span class="function"><span class="title">push</span>(<span class="params">element</span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.#stack.push(element)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 出栈</span></span><br><span class="line">  <span class="function"><span class="title">pop</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 查看栈顶</span></span><br><span class="line">  <span class="function"><span class="title">peek</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#stack[<span class="built_in">this</span>.#stack.length - <span class="number">1</span>]</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 获取栈元素的个数</span></span><br><span class="line">  <span class="function"><span class="title">size</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#stack.length</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 查看栈是否为空</span></span><br><span class="line">  <span class="function"><span class="title">isEmpty</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#stack.length === <span class="number">0</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// toString()</span></span><br><span class="line">  <span class="function"><span class="title">toString</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.#stack.join(<span class="string">&#x27; &#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="发布订阅模式"><a href="#发布订阅模式" class="headerlink" title="发布订阅模式"></a>发布订阅模式</h3><h4 id="概念："><a href="#概念：" class="headerlink" title="概念："></a>概念：</h4><p>其实就是让所有的对象与对象之间的调用变成所有的对象都去调用一个对象，你比如说A、B、C三个对象，A要去调用B里面的b，B要去调用C里面的c，C要去调用A里面的a，这样的话这三个对象就完全耦合在一起了，只要其中一个对象丢失，那么另外两个对象就都没用了。</p>
-<p>所以发布订阅就相当于在这些对象里面加一个中间者，A、B、C把a、b、c都放到Observe里面，当要调用时直接去Observe里面拿就好了</p>
-<h4 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a>代码实现：</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Observer</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">this</span>.callBacks = &#123;&#125; <span class="comment">// 创建一个空对象用于保存所有的事件以及回调</span></span><br><span class="line">  &#125;</span><br><span class="line">  $on(name, fun) &#123; <span class="comment">// 发布时间，将事件名和事件函数都存入callBacks</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.callBacks[name]) &#123;</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name].push(fun)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name] = []</span><br><span class="line">      <span class="built_in">this</span>.callBacks[name].push(fun)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $emit(name, obj) &#123; <span class="comment">// 订略事件，调用callBacks中的已存在事件</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span>.callBacks[name]) &#123;</span><br><span class="line">      <span class="keyword">let</span> call = <span class="built_in">this</span>.callBacks[name]</span><br><span class="line">      call.forEach(<span class="function"><span class="params">v</span> =&gt;</span> &#123;</span><br><span class="line">        v.call(<span class="built_in">this</span>, obj)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  $off(name) &#123; <span class="comment">// 清除事件</span></span><br><span class="line">    <span class="built_in">this</span>.callBacks[name] = <span class="literal">null</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-
-<p>上面代码我实验了一下：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">observer.$on(<span class="string">&#x27;event1&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event1事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;event1&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$on(<span class="string">&#x27;event1&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event1事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;再次调用event1&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$on(<span class="string">&#x27;event2&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">arg</span>)</span>&#123; <span class="comment">// 订略event2事件，并添加一个回调函数</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;event2&#x27;</span>, arg);</span><br><span class="line">&#125;)</span><br><span class="line">observer.$emit(<span class="string">&#x27;event1&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;eeeee&#x27;</span> &#125;) <span class="comment">// 发布event1事件</span></span><br><span class="line"><span class="comment">// event1 &#123; name: &#x27;eeeee&#x27; &#125;</span></span><br><span class="line"><span class="comment">// 再次调用event1 &#123; name: &#x27;eeeee&#x27; &#125;</span></span><br><span class="line">observer.$emit(<span class="string">&#x27;event2&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;wwwww&#x27;</span> &#125;) <span class="comment">// 发布event2事件</span></span><br><span class="line"><span class="comment">// event2 &#123; name: &#x27;wwwww&#x27; &#125;</span></span><br><span class="line">observer.$off(<span class="string">&#x27;event1&#x27;</span>) <span class="comment">// 清除event1事件的所有订略</span></span><br><span class="line">observer.$emit(<span class="string">&#x27;event1&#x27;</span>, &#123; <span class="attr">name</span>: <span class="string">&#x27;ssss&#x27;</span> &#125;) <span class="comment">// 重新发布event1事件（没反应）</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>十进制转二进制：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dec2bin</span>(<span class="params">decNumber</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 新建一个栈</span></span><br><span class="line">  <span class="keyword">let</span> stack = <span class="keyword">new</span> Stack()</span><br><span class="line">  <span class="function"><span class="title">while</span>(<span class="params">decNumber &gt; <span class="number">0</span></span>)</span> &#123;</span><br><span class="line">    <span class="comment">// 将余数存入栈</span></span><br><span class="line">    stack.push(decNumber % <span class="number">2</span>)</span><br><span class="line">    <span class="comment">// 获取整除后的结果作为下一次运行的数字</span></span><br><span class="line">    decNumber = <span class="built_in">Math</span>.floor(decNumber / <span class="number">2</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">&#x27;&#x27;</span></span><br><span class="line">  <span class="comment">// 将栈中数据取出</span></span><br><span class="line">  <span class="function"><span class="title">while</span>(<span class="params">!stack.isEmpty()</span>)</span> &#123;</span><br><span class="line">    str += stack.pop()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> str</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -293,7 +295,7 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/JS/" rel="tag"># JS</a>
-              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
           </div>
 
         
@@ -302,13 +304,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/11/18/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98/" rel="prev" title="浏览器缓存">
-      <i class="fa fa-chevron-left"></i> 浏览器缓存
+    <a href="/2020/12/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_%E9%98%9F%E5%88%97/" rel="prev" title="数据结构_队列">
+      <i class="fa fa-chevron-left"></i> 数据结构_队列
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/12/03/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84_%E9%98%9F%E5%88%97/" rel="next" title="数据结构_队列">
-      数据结构_队列 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -367,7 +366,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">发布订阅模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">代码实现：</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%B9%E7%82%B9%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">特点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">常用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.4.</span> <span class="nav-text">使用</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
